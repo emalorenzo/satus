@@ -36,7 +36,9 @@ const devs = [
   },
 ]
 
-export default function Home({ data }) {
+export default function Home({ content }) {
+  const { title, subtitle, description } = content
+
   const rectRef = useRef()
   const [ref, compute] = useRect()
   const locomotive = useStore((state) => state.locomotive)
@@ -57,11 +59,17 @@ export default function Home({ data }) {
   }, 0)
 
   // console.log('update')
-  console.log('DATA FROM DATO:', data)
+  console.log('DATA FROM DATO', content)
 
   return (
     <Layout theme="light">
       <section data-scroll-section className={s.home}>
+        <div style={{ maxWidth: '700px', margin: '0 auto' }}>
+          <h1 style={{ margin: '10px' }}>{title}</h1>
+          <h2 style={{ margin: '10px' }}>{subtitle}</h2>
+          <p style={{ margin: '10px' }}>{description}</p>
+        </div>
+
         <Marquee className={s.marquee} repeat={3}>
           <span className={s.item}>marquee stuff that scroll continuously</span>
         </Marquee>
@@ -155,16 +163,17 @@ export default function Home({ data }) {
 
 export const getStaticProps = async ({ preview = false }) => {
   const cmsMethods = new CmsMethods()
-  const variables = {
-    pageId: '140884',
-    preview: preview,
-  }
-  const fetchHomePage = await fetchCmsQuery(homeQuery, variables)
-  const data = 'calo'
+
+  // const variables = {
+  //   id: '6655173',
+  // }
+
+  const fetchHomePage = await fetchCmsQuery(homeQuery)
+  const content = fetchHomePage?.home
 
   return {
     props: {
-      data,
+      content,
     },
     revalidate: 1,
   }

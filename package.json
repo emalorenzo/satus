@@ -22,6 +22,7 @@
     "@studio-freight/locomotive-scroll": "^0.0.8",
     "clsx": "^1.1.1",
     "cross-env": "^7.0.3",
+    "datocms-client": "^3.5.19",
     "debounce": "^1.2.1",
     "embla-carousel-autoplay": "^6.2.0",
     "embla-carousel-react": "^6.2.0",

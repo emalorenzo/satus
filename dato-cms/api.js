@@ -2,17 +2,12 @@ import { GraphQLClient } from 'graphql-request'
 
 const fetchCmsQuery = async (query, variables) => {
   try {
-    const endpoint = `https://graphql.datocms.com`
+    const endpoint = `https://graphql.datocms.com/`
     const graphQLClient = new GraphQLClient(endpoint, {
       headers: {
-        authorization: `Bearer ${
-          variables.preview
-            ? process.env.NEXT_DATOCMS_API_TOKEN
-            : process.env.NEXT_DATOCMS_API_TOKEN
-        }`,
+        authorization: `Bearer ${process.env.NEXT_DATOCMS_API_TOKEN}`,
       },
     })
-    alert('error papa')
     return await graphQLClient.request(query, variables)
   } catch (error) {
     console.error(
