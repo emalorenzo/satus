@@ -15,7 +15,7 @@ module.exports = withPlugins([withTM(), [withBundleAnalyzer]], {
   swcMinify: true,
   images: {
     // ADD in case you need to import SVGs in next/image component
-    // dangerouslyAllowSVG: true,
+    dangerouslyAllowSVG: true,
     // contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
     domains: ['images.ctfassets.net'],
     formats: ['image/avif', 'image/webp'],

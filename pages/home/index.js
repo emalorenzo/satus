@@ -5,6 +5,8 @@ import { Marquee } from 'components/marquee'
 import { MarqueeScroll } from 'components/marquee-scroll'
 import * as Select from 'components/select'
 import { Slider } from 'components/slider'
+import { CmsMethods, fetchCmsQuery } from 'dato-cms/api.js'
+import { homeQuery } from 'dato-cms/queries/homepage.graphql'
 import { useScroll } from 'hooks/use-scroll'
 import { Layout } from 'layouts/default'
 import { useStore } from 'lib/store'
@@ -34,7 +36,7 @@ const devs = [
   },
 ]
 
-export default function Home() {
+export default function Home({ data }) {
   const rectRef = useRef()
   const [ref, compute] = useRect()
   const locomotive = useStore((state) => state.locomotive)
@@ -54,7 +56,8 @@ export default function Home() {
     rectRef.current.innerHTML = string
   }, 0)
 
-  console.log('update')
+  // console.log('update')
+  console.log('DATA FROM DATO:', data)
 
   return (
     <Layout theme="light">
@@ -148,4 +151,21 @@ export default function Home() {
       </section>
     </Layout>
   )
+}
+
+export const getStaticProps = async ({ preview = false }) => {
+  const cmsMethods = new CmsMethods()
+  const variables = {
+    pageId: '140884',
+    preview: preview,
+  }
+  const fetchHomePage = await fetchCmsQuery(homeQuery, variables)
+  const data = 'calo'
+
+  return {
+    props: {
+      data,
+    },
+    revalidate: 1,
+  }
 }
