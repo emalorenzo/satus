@@ -1,0 +1,7 @@
+query aboutQuery {
+  about(filter: { id: { eq: "7023190" } }) {
+    title
+    subtitle
+    description
+  }
+}

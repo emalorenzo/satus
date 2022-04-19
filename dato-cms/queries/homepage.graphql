@@ -1,8 +1,7 @@
 query homeQuery {
-   home(filter: {id: {eq: "6655173"}})
-  {
-      title
-      subtitle
-      description
+  home(filter: { id: { eq: "6655173" } }) {
+    title
+    subtitle
+    description
   }
 }
