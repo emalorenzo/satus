@@ -35,10 +35,6 @@ export default function About({ content }) {
 export const getStaticProps = async ({ preview = false }) => {
   const cmsMethods = new CmsMethods()
 
-  // const variables = {
-  //   id: '6655173',
-  // }
-
   const fetchAboutPage = await fetchCmsQuery(aboutQuery)
   const content = fetchAboutPage?.about
 
@@ -46,6 +42,5 @@ export const getStaticProps = async ({ preview = false }) => {
     props: {
       content,
     },
-    revalidate: 1,
   }
 }
