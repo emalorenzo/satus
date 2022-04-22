@@ -1,5 +1,5 @@
 query homeQuery {
-  home(filter: { id: { eq: "6655173" } }) {
+  homea(filter: { id: { eq: "6655173" } }) {
     title
     subtitle
     description

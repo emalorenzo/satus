@@ -17,7 +17,7 @@ module.exports = withPlugins([withTM(), [withBundleAnalyzer]], {
     // ADD in case you need to import SVGs in next/image component
     dangerouslyAllowSVG: true,
     // contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
-    domains: ['images.ctfassets.net'],
+    domains: ['images.ctfassets.net', 'www.datocms-assets.com'],
     formats: ['image/avif', 'image/webp'],
   },
   async redirects() {

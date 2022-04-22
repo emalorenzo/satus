@@ -169,12 +169,11 @@ export const getStaticProps = async ({ preview = false }) => {
   // }
 
   const fetchHomePage = await fetchCmsQuery(homeQuery)
-  const content = fetchHomePage?.home
+  const content = fetchHomePage?.homea
 
   return {
     props: {
       content,
     },
-    revalidate: 1,
   }
 }

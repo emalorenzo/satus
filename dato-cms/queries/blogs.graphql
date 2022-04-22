@@ -1,0 +1,27 @@
+query allBlogsQuery {
+  allBlogs {
+    slug
+  }
+}
+
+query getAllPageSlugsQuery($slug: String!) {
+  blog(filter: { slug: { eq: $slug } }) {
+    slug
+    title
+    richText {
+      value
+    }
+    image {
+      url
+    }
+  }
+}
+
+query blogPageQuery {
+  blogPage(filter: { id: { eq: "8332380" } }) {
+    blog {
+      title
+      slug
+    }
+  }
+}
