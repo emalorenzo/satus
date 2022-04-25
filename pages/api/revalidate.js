@@ -13,7 +13,7 @@ export default async function handler(req, res) {
   if (req.query.secret !== 'satus') {
     return res.status(401).json({ message: 'Invalid token' })
   }
-  console.log(req.body)
+
   try {
     // check that body is not empty
     const body = req.body

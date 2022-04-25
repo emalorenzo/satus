@@ -1,6 +1,7 @@
 import * as Accordion from '@radix-ui/react-accordion'
 import { useRect } from '@studio-freight/hamo'
 import { Kinesis } from 'components/kinesis'
+import { Link } from 'components/link'
 import { Marquee } from 'components/marquee'
 import { MarqueeScroll } from 'components/marquee-scroll'
 import * as Select from 'components/select'
@@ -68,6 +69,12 @@ export default function Home({ content }) {
           <h1 style={{ margin: '10px' }}>{title}</h1>
           <h2 style={{ margin: '10px' }}>{subtitle}</h2>
           <p style={{ margin: '10px' }}>{description}</p>
+        </div>
+
+        <div>
+          <Link href="/blog" style={{ margin: '10px' }}>
+            <h2 style={{ margin: '10px' }}> Go to BLOGS</h2>
+          </Link>
         </div>
 
         <Marquee className={s.marquee} repeat={3}>

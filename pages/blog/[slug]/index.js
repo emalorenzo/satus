@@ -1,4 +1,5 @@
 import { useRect } from '@studio-freight/hamo'
+import { Link } from 'components/link'
 import { fetchCmsQuery } from 'dato-cms/api.js'
 import {
   allBlogsQuery,
@@ -17,8 +18,6 @@ export default function Blog({ data }) {
   const [ref, compute] = useRect()
   const locomotive = useStore((state) => state.locomotive)
 
-  console.log('DATA FROM DATO', data)
-
   return (
     <Layout theme="light">
       <section data-scroll-section>
@@ -30,6 +29,10 @@ export default function Blog({ data }) {
 
           {image && <Image src={image.url} alt="" width={500} height={500} />}
         </div>
+
+        <Link href="/blog" style={{ margin: '10px' }}>
+          <h2 style={{ margin: '20px' }}>back to Blogs</h2>
+        </Link>
       </section>
     </Layout>
   )
