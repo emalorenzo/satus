@@ -18,7 +18,8 @@ query getAllPageSlugsQuery($slug: String!) {
 }
 
 query blogPageQuery {
-  blogPage(filter: { id: { eq: "8332380" } }) {
+  # blogPage(filter: { id: { eq: "8332380" } }) {
+  blogPage {
     blog {
       title
       slug

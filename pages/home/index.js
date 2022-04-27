@@ -176,7 +176,7 @@ export const getStaticProps = async ({ preview = false }) => {
   // }
 
   const fetchHomePage = await fetchCmsQuery(homeQuery)
-  const content = fetchHomePage?.homea
+  const content = fetchHomePage?.home
 
   return {
     props: {
