@@ -24,6 +24,7 @@ export default async function handler(req, res) {
 
     // get the slug to revalidate from body
     const slugToRevalidate = body.slug
+    console.log(body)
     if (slugToRevalidate) {
       await res.unstable_revalidate(`/${slugToRevalidate}`)
       return res.json({ revalidated: true })
