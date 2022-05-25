@@ -62,7 +62,7 @@ export default function Home({ content }) {
 
   return (
     <Layout theme="light">
-      <section data-scroll-section className={s.home}>
+      <section className={s.home}>
         <div style={{ maxWidth: '700px', margin: '0 auto' }}>
           <h1 style={{ margin: '10px' }}>{title}</h1>
           <h2 style={{ margin: '10px' }}>{subtitle}</h2>

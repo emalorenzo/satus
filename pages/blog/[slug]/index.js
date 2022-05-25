@@ -6,7 +6,6 @@ import {
   getAllPageSlugsQuery,
 } from 'dato-cms/queries/blogs.graphql'
 import { Layout } from 'layouts/default'
-import { useStore } from 'lib/store'
 import Image from 'next/image'
 import { useRef } from 'react'
 import { StructuredText } from 'react-datocms'
@@ -16,11 +15,10 @@ export default function Blog({ data }) {
 
   const rectRef = useRef()
   const [ref, compute] = useRect()
-  const locomotive = useStore((state) => state.locomotive)
 
   return (
     <Layout theme="light">
-      <section data-scroll-section>
+      <section>
         <div style={{ maxWidth: '700px', margin: '0 auto' }}>
           <h1 style={{ margin: '10px' }}>{title}</h1>
           <p style={{ margin: '10px' }}>

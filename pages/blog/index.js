@@ -2,7 +2,6 @@ import { useRect } from '@studio-freight/hamo'
 import { fetchCmsQuery } from 'dato-cms/api.js'
 import { blogPageQuery } from 'dato-cms/queries/blogs.graphql'
 import { Layout } from 'layouts/default'
-import { useStore } from 'lib/store'
 import Link from 'next/link'
 import { useRef } from 'react'
 import s from './blogs.module.scss'
@@ -10,13 +9,12 @@ import s from './blogs.module.scss'
 export default function Blogs({ data }) {
   const rectRef = useRef()
   const [ref, compute] = useRect()
-  const locomotive = useStore((state) => state.locomotive)
 
   console.log('DATA FROM DATO', data)
 
-  return (
+  return data ? (
     <Layout theme="light">
-      <section data-scroll-section>
+      <section>
         <div
           className={s.wrapper}
           style={{ maxWidth: '700px', margin: '0 auto' }}
@@ -32,7 +30,7 @@ export default function Blogs({ data }) {
         </div>
       </section>
     </Layout>
-  )
+  ) : null
 }
 
 export const getStaticProps = async ({ preview = false }) => {
@@ -41,9 +39,15 @@ export const getStaticProps = async ({ preview = false }) => {
   // }
 
   const fetchBlogPage = await fetchCmsQuery(blogPageQuery)
-  const data = fetchBlogPage?.blogPage.blog
+
+  // console.log({ fetchBlogPage })
+
+  const data = fetchBlogPage?.blogPage?.blog
+    ? fetchBlogPage.blogPage.blog
+    : null
 
   console.log('DATA FROM DATO', data)
+
   return {
     props: {
       data,
