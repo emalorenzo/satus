@@ -19,32 +19,20 @@ const nextConfig = {
   reactStrictMode: true,
   experimental: {
     optimizeCss: true,
-    browsersListForSwc: true,
     legacyBrowsers: false,
     nextScriptWorkers: true,
   },
   compiler: {
     removeConsole: process.env.NODE_ENV !== 'development',
   },
-  swcMinify: true,
   images: {
     domains: ['cdn.shopify.com'],
     formats: ['image/avif', 'image/webp'],
-    allowFutureImage: true,
   },
   // add @import 'styles/_functions'; to all scss files.
   sassOptions: {
     includePaths: [path.join(__dirname, 'styles')],
     prependData: `@import 'styles/_functions';`,
-  },
-  async redirects() {
-    return [
-      {
-        source: '/home',
-        destination: '/',
-        permanent: true,
-      },
-    ]
   },
   webpack: (config, options) => {
     const { dir } = options
@@ -133,6 +121,15 @@ const nextConfig = {
             value: '1; mode=block',
           },
         ],
+      },
+    ]
+  },
+  redirects: async () => {
+    return [
+      {
+        source: '/home',
+        destination: '/',
+        permanent: true,
       },
     ]
   },
