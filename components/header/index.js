@@ -8,10 +8,13 @@ import { Cart } from './cart'
 import s from './header.module.scss'
 
 export const Header = forwardRef((_, ref) => {
+  const lenis = useStore((state) => state.lenis)
   const [navIsOpen, setNavIsOpen] = useStore(
     (state) => [state.navIsOpen, state.setNavIsOpen],
     shallow
   )
+
+  const setToggleCart = useStore((state) => state.setToggleCart)
 
   return (
     <>
@@ -27,7 +30,16 @@ export const Header = forwardRef((_, ref) => {
           </button>
           <div>
             <Link href="/">home</Link>/<Link href="/gsap">gsap</Link>/
-            <Link href="/contact">contact</Link>
+            <Link href="/contact">contact</Link>/
+            <button
+              onClick={() => {
+                setToggleCart(true)
+                lenis.stop()
+              }}
+              className={cn('p s text-bold', s.hover, s.last)}
+            >
+              {`Bag`}
+            </button>
           </div>
         </div>
       </header>

@@ -3,8 +3,9 @@ import Shopify from 'lib/shopify'
 
 const Product = async (req, res) => {
   const store = new Shopify()
+
   try {
-    const { id } = req.query
+    const id = req.query.id.split('-')[0]
     const { variantId, quantity, lineItemId, putAction } = req.body
 
     if (typeof id !== 'string') {

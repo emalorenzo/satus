@@ -59,3 +59,24 @@ query cartFetch($cartId: ID!) {
     }
   }
 }
+
+query cartCheck($cartId: ID!) {
+  cart(id: $cartId) {
+    id
+    createdAt
+    updatedAt
+  }
+}
+
+query getCollection($collectionHandle: String!) {
+  collectionByHandle(handle: $collectionHandle) {
+    products(first: 100) {
+      edges {
+        node {
+          id
+          title
+        }
+      }
+    }
+  }
+}

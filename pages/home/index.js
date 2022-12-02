@@ -10,7 +10,7 @@ export default function Home({ productsArray, categories }) {
 
   return (
     <Layout>
-      <section className={s.hero} data-scroll-section>
+      <section className={s.hero}>
         <h1 className={s.title}>Shopify Starter</h1>
         <p className="text-decorative text-uppercase text-left">Sort By:</p>
         <div className={s.categories}>
@@ -28,7 +28,7 @@ export default function Home({ productsArray, categories }) {
           ))}
         </div>
       </section>
-      <section data-scroll-section>
+      <section>
         <div className={cn('layout-grid', s['product-grid'])}>
           {productsArray
             .filter((product) => product.tags.includes(categoryFilter))

@@ -4,7 +4,7 @@ import s from './footer.module.scss'
 
 export function Footer() {
   return (
-    <footer className={cn(s.footer, className)} data-scroll-section>
+    <footer className={cn(s.footer)}>
       <div className="layout-block">
         <h2>
           <Link href="mailto:contact@studiofreight.com">mail</Link>

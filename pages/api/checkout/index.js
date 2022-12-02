@@ -3,10 +3,17 @@ import Shopify from 'lib/shopify'
 
 const checkout = async (req, res) => {
   const store = new Shopify()
+
   try {
     switch (req.method) {
       case 'GET': {
         const { cart } = await store.createCart()
+        success(res, { cart })
+        break
+      }
+      case 'POST': {
+        const { cartId } = req.body
+        const cart = await store.checkCart(cartId)
         success(res, { cart })
         break
       }

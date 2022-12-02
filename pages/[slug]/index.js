@@ -12,16 +12,16 @@ import s from './pdp.module.scss'
 
 export default function Pdp({ product, relatedProducts }) {
   const setToggleCart = useStore((state) => state.setToggleCart)
+  const checkoutId = useStore(({ checkoutId }) => checkoutId)
   const cart = useCart()
-  const checkoutId = cart.checkoutId
   const [selectedVariant, setSelectedVariant] = useState({
     availableQuantity: 1000,
   })
   const [purchaseQuantity, setPurchaseQuantity] = useState(1)
 
-  const { data, isValidating, mutate } = useSWR(
-    checkoutId ? 'cart' : null,
-    () => cart.cartFetcher(`/api/checkout/${checkoutId}`),
+  const { mutate } = useSWR(
+    checkoutId,
+    () => cart.cartFetcher(`/api/checkout/${checkoutId}-pdp`),
     { fallbackData: { products: [] } }
   )
 
@@ -34,9 +34,9 @@ export default function Pdp({ product, relatedProducts }) {
 
   return (
     <Layout>
-      <section data-scroll-section className={cn('layout-grid', s.product)}>
+      <section className={cn('layout-grid', s.product)}>
         <div className={s.image}>
-          <Image src={product.images[0]} alt="" layout="fill" />
+          <Image src={product.images[0].src} alt="" layout="fill" />
         </div>
         <div className={s.properties}>
           <h1 className={s.name}>{product.name}</h1>
@@ -114,7 +114,7 @@ export default function Pdp({ product, relatedProducts }) {
           <p className={s.description}>{product.description}</p>
         </div>
       </section>
-      <section data-scroll-section className={s['related-products']}>
+      <section className={s['related-products']}>
         <Slider
           emblaApi={{
             containScroll: 'keepSnaps',

@@ -23,17 +23,13 @@ export const Cart = ({}) => {
     }
   })
 
+  const checkoutId = useStore(({ checkoutId }) => checkoutId)
   const cart = useCart()
-  const checkoutId = cart.checkoutId
-  const { data, isValidating, mutate } = useSWR(
-    checkoutId ? 'cart' : null,
-    () => cart.cartFetcher(`/api/checkout/${checkoutId}`),
+  const { data, mutate } = useSWR(
+    checkoutId,
+    () => cart.cartFetcher(`/api/checkout/${checkoutId}-cart`),
     { fallbackData: { products: [] } }
   )
-
-  // useEffect(() => {
-  //   console.log({ data })
-  // }, [data])
 
   const updateCartPrice = () => {
     return data.products.reduce(
