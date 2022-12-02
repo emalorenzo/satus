@@ -47,10 +47,14 @@ This starter kit is composed of:
   - To VW Functions
   - Reset
   - Easings
+- Hooks:
+  - provided by @studio-freight/hamo
+  - - useScroll
 - Custom Cursor support
 - Real Viewport component
 - Grid Debugger
-- Stats
+- Github workflow to render lighthouse on slack:
+  make sure you update the `vercel_project_id` in `.github/workflows/lighthouse-on-vercel-preview-url.yml` to your Vercel project id.
 
 <br/>
 

@@ -5,29 +5,6 @@ import Image from 'next/image'
 import { useState } from 'react'
 import s from './home.module.scss'
 
-const devs = [
-  {
-    name: 'Franco',
-    position: 'Lords of Lords',
-    image: 'https://assets.studiofreight.com/devs/franco.png',
-  },
-  {
-    name: 'Clement',
-    position: 'Expert on Dark Magic',
-    image: 'https://assets.studiofreight.com/devs/clement.png',
-  },
-  {
-    name: 'Leandro',
-    position: 'He didnt fucked it up',
-    image: 'https://assets.studiofreight.com/devs/leandro.png',
-  },
-  {
-    name: 'Guido',
-    position: 'Avoids owning projects',
-    image: 'https://assets.studiofreight.com/devs/guido.png',
-  },
-]
-
 export default function Home({ productsArray, categories }) {
   const [categoryFilter, setCategoryFilter] = useState('shop all')
 

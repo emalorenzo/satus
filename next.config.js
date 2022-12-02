@@ -1,13 +1,27 @@
-const withPlugins = require('next-compose-plugins')
+const runtimeCaching = require('next-pwa/cache')
+const withPWA = require('next-pwa')({
+  dest: 'public',
+  register: true,
+  skipWaiting: true,
+  runtimeCaching,
+  disable: process.env.NODE_ENV === 'development',
+  buildExcludes: [/middleware-manifest.json$/],
+  maximumFileSizeToCacheInBytes: 4000000,
+})
 const withTM = require('next-transpile-modules')([])
+const DuplicatePackageCheckerPlugin = require('duplicate-package-checker-webpack-plugin')
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 })
+const path = require('path')
 
-module.exports = withPlugins([withTM(), [withBundleAnalyzer]], {
+const nextConfig = {
   reactStrictMode: true,
   experimental: {
     optimizeCss: true,
+    browsersListForSwc: true,
+    legacyBrowsers: false,
+    nextScriptWorkers: true,
   },
   compiler: {
     removeConsole: process.env.NODE_ENV !== 'development',
@@ -16,6 +30,12 @@ module.exports = withPlugins([withTM(), [withBundleAnalyzer]], {
   images: {
     domains: ['cdn.shopify.com'],
     formats: ['image/avif', 'image/webp'],
+    allowFutureImage: true,
+  },
+  // add @import 'styles/_functions'; to all scss files.
+  sassOptions: {
+    includePaths: [path.join(__dirname, 'styles')],
+    prependData: `@import 'styles/_functions';`,
   },
   async redirects() {
     return [
@@ -91,6 +111,36 @@ module.exports = withPlugins([withTM(), [withBundleAnalyzer]], {
       }
     )
 
+    config.plugins.push(new DuplicatePackageCheckerPlugin())
+
     return config
   },
-})
+  headers: async () => {
+    return [
+      {
+        source: '/(.*)',
+        headers: [
+          {
+            key: 'X-Content-Type-Options',
+            value: 'nosniff',
+          },
+          {
+            key: 'X-Frame-Options',
+            value: 'SAMEORIGIN',
+          },
+          {
+            key: 'X-XSS-Protection',
+            value: '1; mode=block',
+          },
+        ],
+      },
+    ]
+  },
+}
+
+module.exports = () => {
+  const plugins = [withPWA, withTM, withBundleAnalyzer]
+  return plugins.reduce((acc, plugin) => plugin(acc), {
+    ...nextConfig,
+  })
+}

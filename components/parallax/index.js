@@ -1,6 +1,5 @@
 import { useLayoutEffect } from '@studio-freight/hamo'
 import { gsap } from 'gsap'
-import { mapRange } from 'lib/maths'
 import { useRef } from 'react'
 import { useWindowSize } from 'react-use'
 
@@ -19,26 +18,21 @@ export function Parallax({
   useLayoutEffect(() => {
     const y = windowWidth * speed * 0.1
 
-    const timeline = gsap.timeline({
-      scrollTrigger: {
-        id: id,
-        trigger: trigger.current,
-        scrub: true,
-        start: 'top bottom',
-        end: 'bottom top',
-        onUpdate: (e) => {
-          if (position === 'top') {
-            gsap.set(target.current, {
-              y: -e.progress * y,
-            })
-          } else {
-            gsap.set(target.current, {
-              y: -mapRange(0, 1, e.progress, -y, y),
-            })
-          }
+    const timeline = gsap
+      .timeline({
+        scrollTrigger: {
+          id: id,
+          trigger: position === 'top' ? document.body : trigger.current,
+          scrub: true,
+          start: position === 'top' ? 'top top' : 'top bottom',
+          end: position === 'top' ? '+=100%' : 'bottom top',
         },
-      },
-    })
+      })
+      .fromTo(
+        target.current,
+        { y: position === 'top' ? 0 : -y },
+        { y: y, ease: 'none' }
+      )
 
     return () => {
       timeline.kill()
