@@ -42,7 +42,7 @@ export function Hero({ onLoad = () => {} }) {
 
   useEffect(() => {
     project.ready.then(() => {
-      sheet.sequence.play({ iterationCount: Infinity })
+      // sheet.sequence.play({ iterationCount: Infinity })
     })
   }, [])
 
