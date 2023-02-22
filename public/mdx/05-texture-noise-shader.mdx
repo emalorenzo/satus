@@ -1,0 +1,3 @@
+Loads a texture into a plane and distorts it using Noise3D. Mixes the color of the texture with white.
+Vertex shader calculates noise and elevation and passes uv to fragment.
+Fragment normalizes noise value, since it's between -1 and 1 and we need between on 0 - 1. Then it mixes the normalized noise value with white.

@@ -1,0 +1,4 @@
+Normalize coordinates to draw Sin curve from 0 to PI.
+For default Three.js coordinates are centered, so we need to move them to the left.
+That's done with "correctionOffset".
+Then we need the values to be normalized between 0 and PI, that's done with (1. / uSize) * PI
